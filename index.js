@@ -1,10 +1,10 @@
 const serverless = require("serverless-http");
 const express = require("express");
 const app = express();
-const appRouter = require("./bin/app").default;
+const appHandler = require("./bin/renderers/server").default;
 
 app.get("*", function(req, res) {
-  appRouter(res, res);
+  appHandler(req, res);
 });
 
 module.exports.handler = serverless(app);
