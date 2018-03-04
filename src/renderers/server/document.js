@@ -8,7 +8,7 @@ export default html => `
     </head>
     <body>
         <div id="app">${html}</div>
-        <!-- <script src="/dist/client.js"></script> -->
+        <script src="http://localhost:9000/bundle.js"></script>
     </body>
     </html>
 `;

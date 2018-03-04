@@ -9,6 +9,8 @@ provider:
 functions:
   app:
     handler: index.handler
+    environment:
+      IN_LAMBDA: 'true'
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
