@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "transpile": "babel --presets=env,react src --out-dir bin"
+    "transpile": "babel --presets=env,react src --out-dir bin",
+    "predeploy": "npm run transpile",
+    "deploy": "sls deploy function -f app",
+    "postdeploy": "rm -rf bin",
+    "logs": "serverless logs -f app -t"
   },
   "keywords": [],
   "author": "",
