@@ -26,7 +26,15 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install
+      - run:
+          name: Install Serverless CLI and dependencies
+          command: |
+            sudo npm i -g serverless
+            npm install
+
+      - run:
+          name: Deploy application
+          command: npm run deploy
 
       - save_cache:
           paths:

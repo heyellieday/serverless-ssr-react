@@ -1,5 +1,12 @@
 service: my-express-application
 
+package:
+  exclude:
+  - coverage/**
+  - .circleci/**
+  - src/**
+  - .git/**
+
 provider:
   name: aws
   runtime: nodejs6.10
