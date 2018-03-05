@@ -6,15 +6,16 @@
   "scripts": {
     "test": "jest",
     "transpile": "babel --presets=env,react src --out-dir bin",
-    "predeploy": "npm run transpile",
-    "deploy": "serverless deploy -v",
+    "predeploy": "npm run transpile && npm run bundle",
+    "deploy": "node utils/uploadToS3.js && serverless deploy -v",
     "postdeploy": "rm -rf bin",
     "predeploy:function": "npm run transpile",
     "deploy:function": "sls deploy function -f app",
     "postdeploy:function": "rm -rf bin",
     "logs": "serverless logs -f app -t",
     "bundle": "webpack",
-    "start": "concurrently --kill-others \"webpack-dev-server\" \"nodemon index.js --exec babel-node --presets=env,react\""
+    "start":
+      "concurrently --kill-others \"webpack-dev-server\" \"nodemon index.js --exec babel-node --presets=env,react\""
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/setupTesting.js"
