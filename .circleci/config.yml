@@ -32,6 +32,9 @@ jobs:
             sudo npm i -g serverless
             npm install
 
+      # run tests!
+      - run: npm run test
+
       - run:
           name: Deploy application
           command: npm run deploy
@@ -40,6 +43,3 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      - run: npm run test
