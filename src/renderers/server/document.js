@@ -8,7 +8,11 @@ export default html => `
     </head>
     <body>
         <div id="app">${html}</div>
-        <script src="http://localhost:9000/bundle.js"></script>
+        <script src="${
+          process.env.IN_LAMBDA
+            ? process.env.BUNDLE_URL
+            : "http://localhost:8080/bundle.js"
+        }"></script>
     </body>
     </html>
 `;
