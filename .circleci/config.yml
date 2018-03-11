@@ -37,7 +37,7 @@ jobs:
 
       - run:
           name: Deploy application
-          command: npm run deploy
+          command: npm run deploy -- --stage production
 
       - save_cache:
           paths:
