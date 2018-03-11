@@ -1,5 +1,9 @@
 import React from "react";
 import { renderRoutes } from "react-router-config";
+
+const makeBuildPath = base => path => `${base ? `/${base}` : ""}${path}`;
+
+const buildPath = makeBuildPath(process.env.PATH_BASE);
 const routes = [
   {
     component: ({ route }) => {
@@ -7,12 +11,12 @@ const routes = [
     },
     routes: [
       {
-        path: "/",
+        path: buildPath("/"),
         component: () => <div>hi!</div>,
         exact: true
       },
       {
-        path: "/home",
+        path: buildPath("/home"),
         component: () => <div>home!</div>,
         exact: true
       }
