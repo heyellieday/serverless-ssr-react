@@ -3,7 +3,7 @@ import { renderRoutes } from "react-router-config";
 
 const makeBuildPath = base => path => `${base ? `/${base}` : ""}${path}`;
 
-const buildPath = makeBuildPath(process.env.PATH_BASE);
+const buildPath = makeBuildPath("dev");
 const routes = [
   {
     component: ({ route }) => {
