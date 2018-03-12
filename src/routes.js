@@ -1,13 +1,14 @@
 import React from "react";
 import { renderRoutes } from "react-router-config";
+import Home from "./pages/home";
 
 const makeBuildPath = base => path => `${base ? `/${base}` : ""}${path}`;
 
 const buildPath = makeBuildPath("");
 const routes = [
   {
-    component: ({ route }) => {
-      return <div>hi{renderRoutes(route.routes)}</div>;
+    component: props => {
+      return <div>hi{renderRoutes(props.route.routes, props)}</div>;
     },
     routes: [
       {
@@ -17,7 +18,7 @@ const routes = [
       },
       {
         path: buildPath("/home"),
-        component: () => <div>home!</div>,
+        component: Home,
         exact: true
       }
     ]

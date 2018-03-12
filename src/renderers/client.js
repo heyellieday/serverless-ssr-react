@@ -4,9 +4,13 @@ import BrowserRouter from "react-router-dom/BrowserRouter";
 import { renderRoutes } from "react-router-config";
 import App from "../app";
 import routes from "../routes";
+import extractSubdomain from "../util/extractSubdomain";
 
 const AppRouter = () => {
-  return <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>;
+  const componentProps = {
+    subdomain: extractSubdomain(window.location.hostname)
+  };
+  return <BrowserRouter>{renderRoutes(routes, componentProps)}</BrowserRouter>;
 };
 
 ReactDOM.render(<AppRouter />, document.getElementById("app"));
