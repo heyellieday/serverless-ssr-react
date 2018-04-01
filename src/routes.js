@@ -8,12 +8,12 @@ const buildPath = makeBuildPath("");
 const routes = [
   {
     component: props => {
-      return <div>hi{renderRoutes(props.route.routes, props)}</div>;
+      return <div>hello{renderRoutes(props.route.routes, props)}</div>;
     },
     routes: [
       {
         path: buildPath("/"),
-        component: () => <div>hi!</div>,
+        component: () => <div>hello!</div>,
         exact: true
       },
       {
