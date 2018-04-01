@@ -7,8 +7,6 @@ module.exports.promised = () => {
     const s3 = new aws.S3();
     const BUNDLE_LOCATION = "dist/bundle.js";
 
-    // Bucket names must be unique across all S3 users
-
     var myBucket = process.env.ASSETS_BUCKET;
 
     fs.readFile(BUNDLE_LOCATION, function(err, data) {
