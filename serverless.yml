@@ -18,7 +18,7 @@ functions:
     handler: index.handler
     environment:
       IN_LAMBDA: 'true'
-      BUNDLE_URL: https://s3-us-west-2.amazonaws.com/${env:ASSETS_BUCKET}/${file(./utils/uploadToS3.js):promised}
+      BUNDLE_URL: https://s3-us-west-2.amazonaws.com/${env:ASSETS_BUCKET}/${opt:bundleName, 'bundle.js'}
       PATH_BASE: 'dev'
     events:
       - http: ANY /
