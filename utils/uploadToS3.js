@@ -1,29 +1,28 @@
-var fs = require("fs");
-var aws = require("aws-sdk");
+import fs from "fs";
+import aws from "aws-sdk";
+import fileToHash from "./fileToHash";
 
-var s3 = new aws.S3();
+const s3 = new aws.S3();
+const BUNDLE_LOCATION = "dist/bundle.js";
 
 // Bucket names must be unique across all S3 users
 
 var myBucket = process.env.ASSETS_BUCKET;
 
-fs.readFile("dist/bundle.js", function(err, data) {
+fs.readFile(BUNDLE_LOCATION, function(err, data) {
   if (err) {
     throw err;
   }
 
-  params = {
-    Bucket: myBucket,
-    Key: `bundle.js`,
-    Body: data,
-    ACL: "public-read"
-  };
-
-  s3.putObject(params, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Successfully uploaded data to myBucket/myKey");
-    }
+  const readStream = fs.createReadStream(BUNDLE_LOCATION);
+  fileToHash(readStream).then(bundleHash => {
+    params = {
+      Bucket: myBucket,
+      Key: `bundle-${bundleHash}.js`,
+      Body: data,
+      ACL: "public-read"
+    };
+    console.log(bundleHash);
+    s3.putObject(params, function(err, data) {});
   });
 });
