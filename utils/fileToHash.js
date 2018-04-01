@@ -1,5 +1,5 @@
-import fs from "fs";
-import crypto from "crypto";
+const fs = require("fs");
+const crypto = require("crypto");
 
 const fileToHash = readStream =>
   new Promise((resolve, reject) =>

@@ -1,6 +1,6 @@
-import fs from "fs";
-import aws from "aws-sdk";
-import fileToHash from "./fileToHash";
+const fs = require("fs");
+const aws = require("aws-sdk");
+const fileToHash = require("./fileToHash");
 
 module.exports.promised = () => {
   const promise = new Promise((resolve, reject) => {
