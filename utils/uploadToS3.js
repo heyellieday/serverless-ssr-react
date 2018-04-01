@@ -8,7 +8,7 @@ const BUNDLE_LOCATION = "dist/bundle.js";
 // Bucket names must be unique across all S3 users
 
 var myBucket = process.env.ASSETS_BUCKET;
-
+console.log("test");
 fs.readFile(BUNDLE_LOCATION, function(err, data) {
   if (err) {
     throw err;
