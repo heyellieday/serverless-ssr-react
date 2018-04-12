@@ -2,32 +2,40 @@ const fs = require("fs");
 const aws = require("aws-sdk");
 const fileToHash = require("./fileToHash");
 
-module.exports.promised = () => {
-  const promise = new Promise((resolve, reject) => {
-    const s3 = new aws.S3();
-    const BUNDLE_LOCATION = "dist/bundle.js";
+const readAndUpload = (prefix, extension, location, resolve) => {
+  fs.readFile(location, function(err, data) {
+    if (err) {
+      throw err;
+    }
 
-    var myBucket = process.env.ASSETS_BUCKET;
-
-    fs.readFile(BUNDLE_LOCATION, function(err, data) {
-      if (err) {
-        throw err;
-      }
-
-      const readStream = fs.createReadStream(BUNDLE_LOCATION);
-      fileToHash(readStream).then(bundleHash => {
-        const bundleName = `bundle-${bundleHash}.js`;
-        params = {
-          Bucket: myBucket,
-          Key: bundleName,
-          Body: data,
-          ACL: "public-read"
-        };
-        s3.putObject(params, function(err, data) {
-          resolve(bundleName);
-        });
+    const readStream = fs.createReadStream(location);
+    fileToHash(readStream).then(bundleHash => {
+      const bundleName = `${prefix}-${bundleHash}.${extension}`;
+      params = {
+        Bucket: process.env.ASSETS_BUCKET,
+        Key: bundleName,
+        Body: data,
+        ACL: "public-read"
+      };
+      const s3 = new aws.S3();
+      s3.putObject(params, function(err, data) {
+        resolve(bundleName);
       });
     });
   });
-  return promise;
+};
+
+module.exports.promised = () => {
+  //Upload bundle.js
+  const promise = new Promise((resolve, reject) => {
+    readAndUpload("bundle", "js", "dist/bundle.js", resolve);
+  });
+  // Upload main.css
+  return new Promise((resolve, reject) => {
+    promise.then(bundleName => {
+      readAndUpload("main", "css", "dist/main.css", cssBundleName =>
+        resolve({ css: cssBundleName, js: bundleName })
+      );
+    });
+  });
 };

@@ -19,6 +19,7 @@ functions:
     environment:
       IN_LAMBDA: 'true'
       BUNDLE_URL: https://s3-us-west-2.amazonaws.com/${env:ASSETS_BUCKET}/${opt:bundleName, 'bundle.js'}
+      CSS_BUNDLE_URL: https://s3-us-west-2.amazonaws.com/${env:ASSETS_BUCKET}/${opt:cssBundleName, 'main.css'}
       PATH_BASE: 'dev'
     events:
       - http: ANY /
