@@ -2,7 +2,7 @@ const fs = require("fs");
 const aws = require("aws-sdk");
 const fileToHash = require("./fileToHash");
 
-const readAndUpload = (prefix, extension, location, resolve) => {
+const readAndUpload = (prefix, extension, location, contentType, resolve) => {
   fs.readFile(location, function(err, data) {
     if (err) {
       throw err;
@@ -15,6 +15,7 @@ const readAndUpload = (prefix, extension, location, resolve) => {
         Bucket: process.env.ASSETS_BUCKET,
         Key: bundleName,
         Body: data,
+        "Content-Type": contentType,
         ACL: "public-read"
       };
       const s3 = new aws.S3();
@@ -28,12 +29,12 @@ const readAndUpload = (prefix, extension, location, resolve) => {
 module.exports.promised = () => {
   //Upload bundle.js
   const promise = new Promise((resolve, reject) => {
-    readAndUpload("bundle", "js", "dist/bundle.js", resolve);
+    readAndUpload("bundle", "js", "dist/bundle.js", "text/javascript", resolve);
   });
   // Upload main.css
   return new Promise((resolve, reject) => {
     promise.then(bundleName => {
-      readAndUpload("main", "css", "dist/main.css", cssBundleName =>
+      readAndUpload("main", "css", "dist/main.css", "text/css", cssBundleName =>
         resolve({ css: cssBundleName, js: bundleName })
       );
     });
