@@ -15,7 +15,7 @@ const readAndUpload = (prefix, extension, location, contentType, resolve) => {
         Bucket: process.env.ASSETS_BUCKET,
         Key: bundleName,
         Body: data,
-        "Content-Type": contentType,
+        ContentType: contentType,
         ACL: "public-read"
       };
       const s3 = new aws.S3();
