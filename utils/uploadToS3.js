@@ -29,7 +29,13 @@ const readAndUpload = (prefix, extension, location, contentType, resolve) => {
 module.exports.promised = () => {
   //Upload bundle.js
   const promise = new Promise((resolve, reject) => {
-    readAndUpload("bundle", "js", "dist/bundle.js", "text/javascript", resolve);
+    readAndUpload(
+      "bundle",
+      "js",
+      "dist/bundle.js",
+      "application/javascript",
+      resolve
+    );
   });
   // Upload main.css
   return new Promise((resolve, reject) => {
