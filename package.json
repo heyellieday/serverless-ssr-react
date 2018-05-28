@@ -16,8 +16,7 @@
     "bundle": "webpack",
     "webpack-dev": "webpack-dev-server",
     "babel-node": "nodemon --exec \"babel-node index.js\"",
-    "start":
-      "concurrently --kill-others \"npm run webpack-dev\" \"npm run babel-node\""
+    "start": "concurrently --kill-others \"npm run webpack-dev\" \"npm run babel-node\""
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/setupTesting.js"
@@ -55,8 +54,16 @@
     "concurrently": "^3.5.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.8.2",
     "jest": "^22.4.2",
     "nodemon": "^1.17.1",
+    "prettier": "^1.13.0",
     "regenerator-runtime": "^0.11.1",
     "shelljs": "^0.8.1",
     "webpack": "^4.3.0",

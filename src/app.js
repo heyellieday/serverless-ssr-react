@@ -5,4 +5,5 @@ const App = () => (
     <button onClick={() => window.alert("hello!")}>Click me!</button>
   </div>
 );
+
 export default App;

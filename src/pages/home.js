@@ -4,6 +4,7 @@ import BaseComponent from "../components/base";
 export default class Home extends BaseComponent {
   render() {
     const { subdomain } = this.props;
+
     return <div>home page: {subdomain}</div>;
   }
 }
